@@ -6,7 +6,7 @@ RABBITMQ_URL = f"amqp://{RABBITMQ_USER}:{RABBITMQ_PASS}@{RABBITMQ_HOST}:{RABBITM
 
 params = pika.URLParameters(RABBITMQ_URL)
 connection = pika.BlockingConnection(params)
-mq_channel = connection.channel()
+channel = connection.channel()
 
-mq_channel.queue_declare(queue=CV_REVIEW_TASKS, durable=True)
-mq_channel.queue_declare(queue=CV_REVIEW_RESULTS, durable=True)
+channel.queue_declare(queue=CV_REVIEW_TASKS, durable=True)
+channel.queue_declare(queue=CV_REVIEW_RESULTS, durable=True)

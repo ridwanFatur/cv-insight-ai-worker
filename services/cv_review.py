@@ -5,7 +5,7 @@ from models.user import User
 from models.user_token import UserToken
 
 import time
-from rabbitmq.client import mq_channel
+from rabbitmq.channel import channel
 from rabbitmq.constants import CV_REVIEW_RESULTS
 import pika
 import logging
@@ -37,7 +37,7 @@ def process_cv_task(body):
             # Publish Event
             time.sleep(5)
             logger.info(f"Task done: {data}")
-            mq_channel.basic_publish(
+            channel.basic_publish(
                 exchange='',
                 routing_key=CV_REVIEW_RESULTS,
                 body=json.dumps({
