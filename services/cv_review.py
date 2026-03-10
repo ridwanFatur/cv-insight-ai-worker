@@ -1,6 +1,7 @@
 import json
 import time
 from sqlalchemy import text
+from ai_services.cv_feedback_analysis import get_feedback
 from db.database import get_connection
 
 from rabbitmq.channel import channel
@@ -17,11 +18,10 @@ def process_cv_task(body):
     logger.info(f"Processing: {data}")
 
     # Get Feedback from AI
-    time.sleep(5)
-    feedback = "This Portfolio Sucks"
     cv_id = data["id"]
     user_id = data["user_id"]
     file_link = data["file_link"]
+    feedback = get_feedback(file_link)
 
     with get_connection() as conn:
         select_query = text(
