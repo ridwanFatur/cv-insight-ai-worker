@@ -21,6 +21,7 @@ def process_cv_task(body):
     feedback = "This Portfolio Sucks"
     cv_id = data["id"]
     user_id = data["user_id"]
+    file_link = data["file_link"]
 
     with get_connection() as conn:
         select_query = text(
